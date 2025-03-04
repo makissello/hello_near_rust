@@ -1,7 +1,7 @@
 use serde_json::json;
 
 #[tokio::test]
-async fn test_contract_is_operational() -> Result<(), Box<dyn std::error::Error>> {
+async fn test_contract_is_operational_2() -> Result<(), Box<dyn std::error::Error>> {
     let contract_wasm = near_workspaces::compile_project("./").await?;
 
     test_basics_on(&contract_wasm).await?;
@@ -16,7 +16,7 @@ async fn test_basics_on(contract_wasm: &[u8]) -> Result<(), Box<dyn std::error::
 
     let outcome = user_account
         .call(contract.id(), "set_greeting")
-        .args_json(json!({"greeting": "Hello World!"}))
+        .args_json(json!({ "greeting": "Hello World!" }))
         .transact()
         .await?;
     assert!(outcome.is_success());
@@ -26,5 +26,3 @@ async fn test_basics_on(contract_wasm: &[u8]) -> Result<(), Box<dyn std::error::
 
     Ok(())
 }
-
-
